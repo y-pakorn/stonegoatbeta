@@ -35,13 +35,15 @@ export const GRADES = {
   },
 } as const;
 
+/**
+ * Remove '-' and 'tag' from grade and add icon
+ * e.g. 'red-tag' -> 'Red 🟥', 'red-orange' -> 'Red Orange 🟥🟧'
+ **/
 export const formatGradeLabel = (grade: string) => {
   if (grade.startsWith("silverhorn") || grade.startsWith("ibex")) {
     return _.startCase(grade.replace(/-/g, " "));
   }
 
-  /// remove '-' and 'tag' from grade and add icon
-  /// e.g. 'red-tag' -> 'Red 🟥', 'red-orange' -> 'Red Orange 🟥🟧'
   const gradeLabel = grade
     .replace(/-tag/g, "")
     .split("-")
