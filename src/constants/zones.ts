@@ -34,3 +34,6 @@ export const ZONES = [
 export const getZoneByLabel = (label: string) => {
   return ZONES.find((zone) => zone.label === label);
 };
+
+export const ZONES_REGEX =
+  /#(comp-wall)|(island)|(khonkaen)|(railay)|(sikhio)|(tonsai)/g;

@@ -40,19 +40,22 @@ export const GRADES = {
  * e.g. 'red-tag' -> 'Red 🟥', 'red-orange' -> 'Red Orange 🟥🟧'
  **/
 export const formatGradeLabel = (grade: string) => {
-  if (grade.startsWith("silverhorn") || grade.startsWith("ibex")) {
-    return _.startCase(grade.replace(/-/g, " "));
+  return formatGradeLabelSep(grade).join(" ");
+};
+
+export const formatGradeLabelSep = (grade: string) => {
+  if (grade.includes("silverhorn") || grade.includes("ibex")) {
+    return [_.startCase(grade.replace(/-/g, " ")), ""];
   }
 
   const gradeLabel = grade
     .replace(/-tag/g, "")
     .split("-")
     .map((word) => _.startCase(word));
-  const gradeIcon = _.map(
-    gradeLabel,
-    (label) => GRADES[_.lowerCase(label) as keyof typeof GRADES].icon
+  const gradeIcon = gradeLabel.map(
+    (label) => GRADES[_.lowerCase(label) as keyof typeof GRADES]?.icon
   );
-  return `${gradeLabel.join(" ")} ${gradeIcon.join(" ")}`;
+  return [gradeLabel.join(" "), gradeIcon?.join(" ")] as const;
 };
 
 export const GRADES_LABEL = [
@@ -78,7 +81,7 @@ export const GRADES_LABEL = [
 ] as const;
 
 export const GRADES_REGEX =
-  /#(reg-tag)|(red-orange)|(orange-tag)|(orange-yellow)|(yellow-tag)|(yellow-green)|(green-tag)|(green-blue)|(blue-tag)|(blue-purple)|(purple-tag)|(purple-black)|(black-tag)|(black-white)|(white-tag)/g;
+  /#(red-tag)|(red-orange)|(orange-tag)|(orange-yellow)|(yellow-tag)|(yellow-green)|(green-tag)|(green-blue)|(blue-tag)|(blue-purple)|(purple-tag)|(purple-black)|(black-tag)|(black-white)|(white-tag)/g;
 
 export const COMP_GRADES_REGEX = /#((silverhorn|ibex)-(f|m))[1-9]/g;
 

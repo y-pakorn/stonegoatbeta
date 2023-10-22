@@ -1,4 +1,5 @@
 import { GRADES_LABEL } from "@/constants/grades";
+import { ZONES } from "@/constants/zones";
 
 export interface Beta {
   caption: string;
@@ -12,6 +13,7 @@ export interface Beta {
 
 export interface BetaInfo extends Beta {
   grade: keyof typeof GRADES_LABEL;
+  zone: string;
   month: string;
   instagram: string | null;
 }
