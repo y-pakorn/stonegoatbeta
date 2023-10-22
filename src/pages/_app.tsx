@@ -5,6 +5,8 @@ import Head from "next/head";
 import { DESCRIPTION, TITLE } from "@/constants/texts";
 import theme from "@/themes";
 import { useBetas } from "@/stores/useBetas";
+import { GoogleAnalytics } from "nextjs-google-analytics";
+import TagManager from "react-gtm-module";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [showChild, setShowChild] = useState(false);
@@ -13,6 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     setShowChild(true);
     fetchBetas();
+    TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_GTM ?? "" });
   }, []);
 
   return (
@@ -26,7 +29,10 @@ const App = ({ Component, pageProps }: AppProps) => {
         {typeof window === "undefined" || !showChild ? (
           <></>
         ) : (
-          <Component {...pageProps} />
+          <>
+            <GoogleAnalytics trackPageViews />
+            <Component {...pageProps} />
+          </>
         )}
       </ChakraProvider>
     </>
