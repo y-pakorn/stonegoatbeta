@@ -11,6 +11,7 @@ import {
   SimpleGrid,
   Icon,
   HStack,
+  useColorMode,
 } from "@chakra-ui/react";
 import { Section, Navbar, Footer } from "@/components/common";
 import { Logo } from "@/components/common/Logo";
@@ -22,6 +23,7 @@ import { AppHeader } from "@/components/common/AppHeader";
 import { GRADES_LABEL, formatGradeLabelSep } from "@/constants/grades";
 
 export const HomePage = () => {
+  const { colorMode } = useColorMode();
   return (
     <>
       <AppHeader title="All Betas" />
@@ -64,6 +66,7 @@ export const HomePage = () => {
                     src={zone.image}
                     height={["full", null, "xs"]}
                     width={["full", null, "3xs"]}
+                    filter={colorMode === "dark" ? "invert(1)" : ""}
                     fit="cover"
                     rounded="lg"
                   />
