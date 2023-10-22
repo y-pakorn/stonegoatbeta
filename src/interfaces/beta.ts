@@ -12,7 +12,7 @@ export interface Beta {
 }
 
 export interface BetaInfo extends Beta {
-  grade: keyof typeof GRADES_LABEL;
+  grade: string;
   zone: string;
   month: string;
   instagram: string | null;

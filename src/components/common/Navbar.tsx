@@ -22,8 +22,12 @@ import { FaMoon, FaSun } from "react-icons/fa6";
 
 const MENU: Menu[] = [
   {
-    label: "All Betas",
+    label: "Betas",
     href: "/",
+  },
+  {
+    label: "All Betas",
+    href: "/all",
   },
   {
     label: "About",

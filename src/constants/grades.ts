@@ -45,7 +45,16 @@ export const formatGradeLabel = (grade: string) => {
 
 export const formatGradeLabelSep = (grade: string) => {
   if (grade.includes("silverhorn") || grade.includes("ibex")) {
-    return [_.startCase(grade.replace(/-/g, " ")), ""];
+    return [
+      _.startCase(
+        grade
+          .replace(/-/g, " ")
+          .replace(/[0-9]/g, "")
+          .replace(" f", "Female")
+          .replace(" m", "Male")
+      ),
+      "",
+    ];
   }
 
   const gradeLabel = grade
@@ -81,7 +90,7 @@ export const GRADES_LABEL = [
 ] as const;
 
 export const GRADES_REGEX =
-  /#(red-tag)|(red-orange)|(orange-tag)|(orange-yellow)|(yellow-tag)|(yellow-green)|(green-tag)|(green-blue)|(blue-tag)|(blue-purple)|(purple-tag)|(purple-black)|(black-tag)|(black-white)|(white-tag)/g;
+  /#(red-tag)|(red-orange)|(orange-tag)|(orange-yellow)|(yellow-tag)|(yellow-green)|(green-tag)|(green-blue)|(blue-tag)|(blue-purple)|(purple-tag)|(purple-black)|(black-tag)|(black-white)|(white-tag)|((silverhorn|ibex)-(f|m))[1-9]/g;
 
 export const COMP_GRADES_REGEX = /#((silverhorn|ibex)-(f|m))[1-9]/g;
 
