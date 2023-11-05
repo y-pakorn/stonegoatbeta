@@ -22,7 +22,7 @@ export const PlayerModal = ({
   beta: BetaInfo | null;
 }) => {
   return (
-    <Modal isCentered size="xl" isOpen={isOpen} onClose={onClose}>
+    <Modal isCentered size="sm" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent bg="transparent" m={4}>
         <HStack pos="absolute" top={4} right={4} zIndex={1}>
