@@ -17,23 +17,8 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import LinkNext from "next/link";
 import { useRouter } from "next/router";
-import { Menu } from "@/interfaces/menu";
 import { FaMoon, FaSun } from "react-icons/fa6";
-
-const MENU: Menu[] = [
-  {
-    label: "Betas",
-    href: "/",
-  },
-  {
-    label: "All Betas",
-    href: "/all",
-  },
-  {
-    label: "About",
-    href: "/about",
-  },
-];
+import { MENU } from "@/constants/menu";
 
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
