@@ -49,9 +49,9 @@ export const PlayerModal = ({
               borderRadius: "24px",
             }}
             controls
-            muted
             playing
             loop
+            volume={0.2}
             url={beta?.media_url}
             width="100%"
             height="100%"
