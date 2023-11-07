@@ -10,7 +10,6 @@ import {
   Button,
   SimpleGrid,
   Icon,
-  HStack,
   useColorMode,
 } from "@chakra-ui/react";
 import { Section, Navbar, Footer } from "@/components/common";
@@ -20,7 +19,12 @@ import { ZONES } from "@/constants/zones";
 import { default as NextLink } from "next/link";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { AppHeader } from "@/components/common/AppHeader";
-import { GRADES_LABEL, formatGradeLabelSep } from "@/constants/grades";
+import {
+  COMP_GRADES,
+  GRADES_LABEL,
+  formatCompGrade,
+  formatGradeLabelSep,
+} from "@/constants/grades";
 
 export const HomePage = () => {
   const { colorMode } = useColorMode();
@@ -59,7 +63,7 @@ export const HomePage = () => {
             </Text>
             <Divider my={4} />
             <Heading fontSize="2xl">Walls / Zones</Heading>
-            <SimpleGrid spacing={4} columns={[1, 2, 4]}>
+            <SimpleGrid spacing={4} columns={[1, 3, 4]}>
               {ZONES.map((zone) => (
                 <Card rounded="xl" p={4} gap={2} key={zone.label}>
                   <Image
@@ -84,13 +88,27 @@ export const HomePage = () => {
             <SimpleGrid spacing={4} columns={[1, 2, 4]}>
               {GRADES_LABEL.map((gl) => {
                 const [grade, icon] = formatGradeLabelSep(gl);
+                const comp = formatCompGrade(gl);
+
                 return (
-                  <Card rounded="xl" p={4} gap={2} key={gl}>
-                    <HStack justify="center">
-                      <Text fontSize="xl" as="b">
-                        {icon || grade}
-                      </Text>
-                    </HStack>
+                  <Card
+                    rounded="xl"
+                    p={4}
+                    gap={2}
+                    key={gl}
+                    bg={comp && COMP_GRADES[comp].color}
+                    color={comp && "white"}
+                    as={Stack}
+                    justify="space-between"
+                  >
+                    <Text
+                      fontSize={comp ? "lg" : "xl"}
+                      as="b"
+                      alignSelf="center"
+                      textAlign="center"
+                    >
+                      {icon || grade}
+                    </Text>
                     <Button as={NextLink} href={`/grades/${gl}`}>
                       View Betas
                     </Button>

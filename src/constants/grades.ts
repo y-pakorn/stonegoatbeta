@@ -1,5 +1,18 @@
 import _ from "lodash";
 
+export const COMP_GRADES = {
+  silverhorn: {
+    label: "Silverhorn",
+    icon: "🦌",
+    color: "#008080b3",
+  },
+  ibex: {
+    label: "Ibex",
+    icon: "🐐",
+    color: "#b30059b3",
+  },
+} as const;
+
 export const GRADES = {
   red: {
     label: "Red",
@@ -35,6 +48,16 @@ export const GRADES = {
   },
 } as const;
 
+export const formatCompGrade = (
+  grade: string
+): "silverhorn" | "ibex" | undefined => {
+  if (grade.includes("silverhorn")) {
+    return "silverhorn";
+  } else if (grade.includes("ibex")) {
+    return "ibex";
+  }
+};
+
 /**
  * Remove '-' and 'tag' from grade and add icon
  * e.g. 'red-tag' -> 'Red 🟥', 'red-orange' -> 'Red Orange 🟥🟧'
@@ -44,7 +67,7 @@ export const formatGradeLabel = (grade: string) => {
 };
 
 export const formatGradeLabelSep = (grade: string) => {
-  if (grade.includes("silverhorn") || grade.includes("ibex")) {
+  if (formatCompGrade(grade)) {
     return [
       _.startCase(
         grade

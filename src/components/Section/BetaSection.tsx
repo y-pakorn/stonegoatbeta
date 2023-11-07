@@ -10,6 +10,7 @@ import {
 import { FaChevronDown } from "react-icons/fa6";
 import { BetaCard } from "../Card/BetaCard";
 import { BetaInfo } from "@/interfaces/beta";
+import { ReactNode } from "react";
 
 export const BetaSection = ({
   label,
@@ -18,7 +19,7 @@ export const BetaSection = ({
   selectBeta,
   betas,
 }: {
-  label: string;
+  label: ReactNode;
   isExpanded: boolean;
   toggleExpanded: () => void;
   selectBeta: (beta: BetaInfo) => void;

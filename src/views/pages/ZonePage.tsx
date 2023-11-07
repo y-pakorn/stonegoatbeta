@@ -3,18 +3,26 @@ import { BetaSection } from "@/components/Section/BetaSection";
 import { Footer, Navbar, Section } from "@/components/common";
 import { AppHeader } from "@/components/common/AppHeader";
 import {
+  COMP_GRADES,
   COMP_GRADES_REGEX,
   GRADES_LABEL,
   GRADES_REGEX,
   INSTAGRAM_HANDLE_REGEX,
   MONTHS_LABEL,
   MONTHS_REGEX,
+  formatCompGrade,
   formatGradeLabel,
 } from "@/constants/grades";
 import { getZoneByLabel } from "@/constants/zones";
 import { BetaInfo } from "@/interfaces/beta";
 import { useBetas } from "@/stores/useBetas";
-import { Center, CircularProgress, Heading, Stack } from "@chakra-ui/react";
+import {
+  Center,
+  CircularProgress,
+  Heading,
+  Stack,
+  chakra,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 
@@ -108,11 +116,25 @@ export const ZonePage = () => {
               ) : (
                 <Stack spacing={4}>
                   {betas.map(([label, betas]) => {
+                    const comp = formatCompGrade(label);
+                    const gradeLabel = formatGradeLabel(label);
                     if (betas.length > 0) {
                       return (
                         <BetaSection
                           key={label}
-                          label={formatGradeLabel(label)}
+                          label={
+                            comp ? (
+                              <chakra.span
+                                bg={COMP_GRADES[comp].color}
+                                color="white"
+                                px={2}
+                              >
+                                {gradeLabel}
+                              </chakra.span>
+                            ) : (
+                              gradeLabel
+                            )
+                          }
                           betas={betas}
                           isExpanded={isExpanded[label]}
                           toggleExpanded={() => {
