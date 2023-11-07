@@ -68,13 +68,15 @@ const Navbar = () => {
             </Text>
             <DesktopNav />
             <Spacer />
-            <IconButton
-              aria-label="Toggle Dark/Light mode"
-              icon={<Icon as={colorMode === "light" ? FaSun : FaMoon} />}
-              onClick={toggleColorMode}
-              rounded="xl"
-            />
           </HStack>
+
+          <IconButton
+            size="sm"
+            aria-label="Toggle Dark/Light mode"
+            icon={<Icon as={colorMode === "light" ? FaSun : FaMoon} />}
+            onClick={toggleColorMode}
+            rounded="xl"
+          />
         </Flex>
 
         <Collapse in={isOpen} animateOpacity>
