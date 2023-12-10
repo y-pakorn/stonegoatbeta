@@ -8,8 +8,6 @@ interface BetaStore {
   isLoading: boolean;
 }
 
-const BETA_ENDPOINT = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,thumbnail_url,timestamp,permalink,caption&access_token=${process.env.NEXT_PUBLIC_IG_ACCESS_TOKEN}&limit=1000`;
-
 export const useBetas = create<BetaStore>((set, get) => ({
   betas: [],
   isLoading: false,
@@ -17,14 +15,9 @@ export const useBetas = create<BetaStore>((set, get) => ({
     try {
       set({ isLoading: true });
       const data: Beta[] = [];
-      const res = await axios.get(BETA_ENDPOINT);
-      data.push(...res.data.data);
-      //if (res.data.paging?.next) {
-      //const nextRes = await axios.get(res.data.paging.next);
-      //data.push(...nextRes.data.data);
-      //}
+      const res = await axios.get("/api/betas");
       set({
-        betas: data,
+        betas: res.data.betas,
       });
     } finally {
       set({ isLoading: false });
