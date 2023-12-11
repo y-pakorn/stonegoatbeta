@@ -4,6 +4,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  LightMode,
   Link,
   Modal,
   ModalContent,
@@ -26,22 +27,24 @@ export const PlayerModal = ({
       <ModalOverlay />
       <ModalContent bg="transparent" m={4}>
         <HStack pos="absolute" top={4} right={4} zIndex={1}>
-          <IconButton
-            icon={<Icon as={FaArrowUpRightFromSquare} />}
-            aria-label="Open Instagram"
-            rounded="xl"
-            colorScheme="whiteAlpha"
-            as={Link}
-            href={beta?.permalink}
-            isExternal
-          />
-          <IconButton
-            icon={<Icon as={FaXmark} />}
-            aria-label="Close"
-            rounded="xl"
-            colorScheme="whiteAlpha"
-            onClick={onClose}
-          />
+          <LightMode>
+            <IconButton
+              icon={<Icon as={FaArrowUpRightFromSquare} />}
+              aria-label="Open Instagram"
+              rounded="xl"
+              colorScheme="whiteAlpha"
+              as={Link}
+              href={beta?.permalink}
+              isExternal
+            />
+            <IconButton
+              icon={<Icon as={FaXmark} />}
+              aria-label="Close"
+              rounded="xl"
+              colorScheme="whiteAlpha"
+              onClick={onClose}
+            />
+          </LightMode>
         </HStack>
         <AspectRatio ratio={9 / 16}>
           <ReactPlayer
