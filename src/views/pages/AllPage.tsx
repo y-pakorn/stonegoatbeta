@@ -91,11 +91,15 @@ export const AllPage = () => {
                     <Stack w="100%">
                       <HStack justify="space-between">
                         <Text>Grade</Text>
-                        <Text as="b">{icon || label}</Text>
+                        <Text as="b" textAlign="right">
+                          {icon || label}
+                        </Text>
                       </HStack>
                       <HStack justify="space-between">
                         <Text>Wall</Text>
-                        <Text as="b">{getZoneByLabel(b.zone)?.name}</Text>
+                        <Text as="b" textAlign="right">
+                          {getZoneByLabel(b.zone)?.name}
+                        </Text>
                       </HStack>
                     </Stack>
                   </BetaCard>
