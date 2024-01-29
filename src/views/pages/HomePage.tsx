@@ -77,7 +77,7 @@ export const HomePage = () => {
                   <Text fontSize="xl" as="b">
                     {zone.name}
                   </Text>
-                  <Button as={NextLink} href={`/zones/${zone.label}`}>
+                  <Button as={NextLink} href={`/all?zones=${zone.label}`}>
                     View Betas
                   </Button>
                 </Card>
@@ -109,7 +109,7 @@ export const HomePage = () => {
                     >
                       {icon || grade}
                     </Text>
-                    <Button as={NextLink} href={`/grades/${gl}`}>
+                    <Button as={NextLink} href={`/all?grades=${gl}`}>
                       View Betas
                     </Button>
                   </Card>
