@@ -16,4 +16,5 @@ export interface BetaInfo extends Beta {
   zone: string;
   month: string;
   instagram: string | null;
+  date: Date;
 }

@@ -15,7 +15,14 @@ export default async function handler(
   }
   const betas: Beta[] = [];
   const response = await axios.get(process.env.BETA_ENDPOINT);
+
   betas.push(...response.data.data);
+
+  if (response.data.paging?.next) {
+    const nextRes = await axios.get(response.data.paging.next);
+    betas.push(...nextRes.data.data);
+  }
+
   res.setHeader("Cache-Control", "public, s-maxage=600");
   res.status(200).json({ betas });
 }

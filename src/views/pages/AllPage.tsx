@@ -5,7 +5,6 @@ import { AppHeader } from "@/components/common/AppHeader";
 import {
   GRADES_REGEX,
   INSTAGRAM_HANDLE_REGEX,
-  MONTHS_LABEL,
   MONTHS_REGEX,
   formatGradeLabelSep,
 } from "@/constants/grades";
@@ -29,7 +28,6 @@ export const AllPage = () => {
 
   const betas = useMemo(() => {
     const betas: BetaInfo[] = [];
-    const monthsFound = new Set<number>();
     for (const beta of allBetas) {
       const zones = [...beta.caption.matchAll(ZONES_REGEX)].map(
         (e) => e?.[1] || e?.[0]
@@ -40,7 +38,6 @@ export const AllPage = () => {
       const month = beta.caption.match(MONTHS_REGEX)?.[0];
       const instagramMatch = beta.caption.match(INSTAGRAM_HANDLE_REGEX);
       if (month && grades && zones) {
-        monthsFound.add(MONTHS_LABEL.indexOf(month as any));
         for (var i = 0; i < grades.length; i++) {
           const grade = grades[i];
           for (var j = 0; j < zones.length; j++) {
@@ -52,22 +49,14 @@ export const AllPage = () => {
                 month,
                 grade: grade as any,
                 instagram: instagramMatch?.[0] || null,
+                date: new Date(beta.timestamp),
               });
             }
           }
         }
       }
     }
-
-    const twoLatestMonths = [...monthsFound]
-      .sort((a, b) => b - a)
-      .slice(0, 2)
-      .map((m) => MONTHS_LABEL[m]);
-    const latestBetas = betas.filter((b) =>
-      twoLatestMonths.includes(b.month as any)
-    );
-
-    return latestBetas;
+    return betas;
   }, [allBetas]);
 
   const [selectedBeta, setSelectedBeta] = useState<BetaInfo | null>(null);
@@ -91,10 +80,14 @@ export const AllPage = () => {
             </Center>
           ) : (
             <SimpleGrid spacing={4} columns={[1, 3, 5]}>
-              {betas.map((b) => {
+              {betas.map((b, i) => {
                 const [label, icon] = formatGradeLabelSep(b.grade);
                 return (
-                  <BetaCard {...b} select={() => setSelectedBeta(b)} key={b.id}>
+                  <BetaCard
+                    {...b}
+                    select={() => setSelectedBeta(b)}
+                    key={`${b.id}-${i}`}
+                  >
                     <Stack w="100%">
                       <HStack justify="space-between">
                         <Text>Grade</Text>

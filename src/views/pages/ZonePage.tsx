@@ -8,7 +8,6 @@ import {
   GRADES_LABEL,
   GRADES_REGEX,
   INSTAGRAM_HANDLE_REGEX,
-  MONTHS_LABEL,
   MONTHS_REGEX,
   formatCompGrade,
   formatGradeLabel,
@@ -46,7 +45,6 @@ export const ZonePage = () => {
     const betas = new Map<string, BetaInfo[]>(
       GRADES_LABEL.map((label) => [label as string, []])
     );
-    const monthsFound = new Set<number>();
     for (const beta of thisZoneBetas) {
       const grades = [
         ...beta.caption.matchAll(isComp ? COMP_GRADES_REGEX : GRADES_REGEX),
@@ -54,7 +52,6 @@ export const ZonePage = () => {
       const monthMatch = beta.caption.match(MONTHS_REGEX);
       const instagramMatch = beta.caption.match(INSTAGRAM_HANDLE_REGEX);
       if (monthMatch && grades) {
-        monthsFound.add(MONTHS_LABEL.indexOf(monthMatch[0] as any));
         for (var i = 0; i < grades.length; i++) {
           const grade = grades[i];
           if (grade) {
@@ -64,25 +61,23 @@ export const ZonePage = () => {
               month: monthMatch[0],
               grade: grade as any,
               instagram: instagramMatch?.[0] || null,
+              date: new Date(beta.timestamp),
             });
           }
         }
       }
     }
 
-    const twoLatestMonths = [...monthsFound]
-      .sort((a, b) => b - a)
-      .slice(0, 2)
-      .map((m) => MONTHS_LABEL[m]);
-    const latestBetas = [...betas.entries()].map(
+    const oneAndHalfMonthAgo = new Date();
+    oneAndHalfMonthAgo.setMonth(oneAndHalfMonthAgo.getMonth() - 1.5);
+
+    return [...betas.entries()].map(
       ([label, betas]) =>
         [
           label,
-          betas.filter((b) => twoLatestMonths.includes(b.month as any)),
+          betas.filter((b) => b.date && b.date > oneAndHalfMonthAgo),
         ] as const
     );
-
-    return latestBetas;
   }, [allBetas, isComp]);
 
   const [isExpanded, setIsExpanded] = useState(
