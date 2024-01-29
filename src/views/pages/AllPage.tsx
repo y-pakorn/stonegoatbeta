@@ -3,12 +3,7 @@ import { BetaCard } from "@/components/Card/BetaCard";
 import { PlayerModal } from "@/components/Modal/PlayerModal";
 import { Footer, Navbar, Section } from "@/components/common";
 import { AppHeader } from "@/components/common/AppHeader";
-import {
-  COMP_GRADES,
-  GRADES_LABEL,
-  formatCompGradeWithSex,
-  formatGradeLabelSep,
-} from "@/constants/grades";
+import { GRADES_LABEL } from "@/constants/grades";
 import { ZONES, getZoneByLabel } from "@/constants/zones";
 import { BetaInfo } from "@/interfaces/beta";
 import { useBetas } from "@/stores/useBetas";
@@ -29,7 +24,6 @@ import {
   Spacer,
   Stack,
   Text,
-  chakra,
 } from "@chakra-ui/react";
 import _ from "lodash";
 import { useRouter } from "next/router";
@@ -43,14 +37,13 @@ import {
 } from "react-icons/fa6";
 
 const timeOptions = {
-  oneDay: 1,
-  oneWeek: 7,
-  twoWeeks: 14,
-  oneMonth: 30,
-  twoMonths: 60,
+  "1Day": 1,
+  "1Week": 7,
+  "1Month": 30,
+  "2Months": 60,
   all: 9999,
 } as const;
-const defaultTime = "twoMonths";
+const defaultTime = "2Months";
 const defaultTimeSort = "desc";
 
 export const AllPage = () => {
@@ -245,7 +238,7 @@ export const AllPage = () => {
                       </HStack>
                     }
                   >
-                    {_.startCase(filter.time)}
+                    {_.startCase(filter.time).slice(0, 3).replace(" ", "")}
                   </MenuButton>
                   <MenuList>
                     <MenuOptionGroup title="Time Range" type="radio">
