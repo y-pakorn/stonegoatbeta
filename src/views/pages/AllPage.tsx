@@ -147,7 +147,7 @@ export const AllPage = () => {
                             key={z.label}
                             value={z.label}
                             isChecked={filter.zones.includes(z.label)}
-                            onChange={(v) => {
+                            onClick={() => {
                               const zones = filter.zones.includes(z.label)
                                 ? filter.zones.filter((g) => g !== z.label)
                                 : [...filter.zones, z.label];
@@ -270,18 +270,7 @@ export const AllPage = () => {
                       </SimpleGrid>
                     </MenuOptionGroup>
                     <MenuDivider />
-                    <MenuOptionGroup
-                      title="Time Order"
-                      type="radio"
-                      onChange={(v) =>
-                        replace({
-                          query: {
-                            ...query,
-                            timeSort: v,
-                          },
-                        })
-                      }
-                    >
+                    <MenuOptionGroup title="Time Order" type="radio">
                       <SimpleGrid columns={1}>
                         <MenuItemOption
                           value="desc"
