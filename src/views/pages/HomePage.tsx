@@ -53,7 +53,7 @@ export const HomePage = () => {
               <chakra.span
                 fontWeight="medium"
                 as={Link}
-                href="https://www.instagram.com/stonegoatbeta/"
+                href="https://www.instagram.com/stonegoat_beta/"
                 isExternal
               >
                 Stonegoat Beta{" "}
