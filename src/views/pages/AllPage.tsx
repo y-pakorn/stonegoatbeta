@@ -3,9 +3,11 @@ import { PlayerModal } from "@/components/Modal/PlayerModal";
 import { Footer, Navbar, Section } from "@/components/common";
 import { AppHeader } from "@/components/common/AppHeader";
 import {
+  COMP_GRADES,
   GRADES_REGEX,
   INSTAGRAM_HANDLE_REGEX,
   MONTHS_REGEX,
+  formatCompGradeWithSex,
   formatGradeLabelSep,
 } from "@/constants/grades";
 import { ZONES_REGEX, getZoneByLabel } from "@/constants/zones";
@@ -18,7 +20,9 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  chakra,
 } from "@chakra-ui/react";
+import _ from "lodash";
 import { useMemo, useState } from "react";
 
 export const AllPage = () => {
@@ -88,20 +92,27 @@ export const AllPage = () => {
                     select={() => setSelectedBeta(b)}
                     key={`${b.id}-${i}`}
                   >
-                    <Stack w="100%">
-                      <HStack justify="space-between">
-                        <Text>Grade</Text>
-                        <Text as="b" textAlign="right">
-                          {icon || label}
-                        </Text>
-                      </HStack>
-                      <HStack justify="space-between">
-                        <Text>Wall</Text>
-                        <Text as="b" textAlign="right">
-                          {getZoneByLabel(b.zone)?.name}
-                        </Text>
-                      </HStack>
-                    </Stack>
+                    <HStack justify="space-between" fontWeight="bold" w="100%">
+                      <Text>
+                        {(() => {
+                          const comp = formatCompGradeWithSex(b.grade || "");
+
+                          if (comp)
+                            return (
+                              <chakra.span
+                                bg={COMP_GRADES[comp[0]].color}
+                                px={2}
+                                color="white"
+                              >
+                                {COMP_GRADES[comp[0]].icon}{" "}
+                                {_.startCase(comp[1])}
+                              </chakra.span>
+                            );
+                          return <>{icon || label}</>;
+                        })()}
+                      </Text>
+                      <Text>{getZoneByLabel(b.zone)?.name}</Text>
+                    </HStack>
                   </BetaCard>
                 );
               })}

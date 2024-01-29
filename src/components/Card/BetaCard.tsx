@@ -1,6 +1,16 @@
 import { BetaInfo } from "@/interfaces/beta";
-import { Image, Link, Spacer, Stack, Text } from "@chakra-ui/react";
+import {
+  HStack,
+  Icon,
+  Image,
+  Link,
+  Spacer,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import { formatDistanceToNow } from "date-fns";
 import { ReactNode } from "react";
+import { FaClockRotateLeft } from "react-icons/fa6";
 
 export const BetaCard = ({
   select,
@@ -20,19 +30,22 @@ export const BetaCard = ({
         cursor="pointer"
         onClick={select}
       />
-      {b.instagram ? (
-        <Text
-          fontStyle="italic"
-          fontSize="sm"
-          as={Link}
-          isExternal
-          href={`https://www.instagram.com/${b.instagram.slice(1)}`}
-        >
-          {b.instagram}
-        </Text>
-      ) : (
-        <Spacer />
-      )}
+      <Stack spacing={0} align="end" fontStyle="italic" fontSize="sm">
+        {b.instagram && (
+          <Text
+            as={Link}
+            isExternal
+            href={`https://www.instagram.com/${b.instagram.slice(1)}`}
+          >
+            {b.instagram}
+          </Text>
+        )}
+        <HStack>
+          <Icon as={FaClockRotateLeft} fontSize="xs" />
+          <Text>{formatDistanceToNow(b.date)} Ago</Text>
+        </HStack>
+      </Stack>
+      <Spacer />
       {children}
     </Stack>
   );

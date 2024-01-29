@@ -58,6 +58,19 @@ export const formatCompGrade = (
   }
 };
 
+export const formatCompGradeWithSex = (
+  grade: string
+): ["silverhorn" | "ibex", "m" | "f"] | undefined => {
+  const sex = grade.includes("m") ? "m" : "f";
+  const g = grade.includes("silverhorn")
+    ? "silverhorn"
+    : grade.includes("ibex")
+    ? "ibex"
+    : undefined;
+  if (!g) return undefined;
+  return [g, sex];
+};
+
 /**
  * Remove '-' and 'tag' from grade and add icon
  * e.g. 'red-tag' -> 'Red 🟥', 'red-orange' -> 'Red Orange 🟥🟧'
