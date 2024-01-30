@@ -1,0 +1,17 @@
+{
+  "name": "Stonegoat Beta",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Discover fellow climber's betas and route hints in Stonegoat climbing gym! Made by cool people for cool people.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF",
+  "theme_color": "#FFF",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
