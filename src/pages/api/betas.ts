@@ -1,9 +1,9 @@
-import { Beta } from "@/interfaces/beta";
+import { BetaInfo } from "@/interfaces/beta";
 import { createClient } from "@supabase/supabase-js";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
-  betas: Beta[] | null;
+  betas: BetaInfo[] | null;
 };
 
 export default async function handler(
@@ -20,8 +20,10 @@ export default async function handler(
   const supabase = createClient(process.env.DB_URL, process.env.DB_API_KEY);
 
   const data = await supabase
-    .from("betas")
+    .from("detailed_betas")
     .select("*")
+    .neq("grade", null)
+    .neq("zone", null)
     .order("timestamp", { ascending: false })
     .limit(200);
 

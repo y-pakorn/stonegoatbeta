@@ -42,7 +42,7 @@ export const BetaCard = ({
         )}
         <HStack>
           <Icon as={FaClockRotateLeft} fontSize="xs" />
-          <Text>{formatDistanceToNow(b.date)} Ago</Text>
+          <Text>{formatDistanceToNow(b.timestamp)} Ago</Text>
         </HStack>
       </Stack>
       <Spacer />

@@ -21,42 +21,13 @@ export const useBetas = create<BetaStore>((set) => ({
       set({ isLoading: true });
 
       const res = await fetch("/api/betas").then((res) => res.json());
-      if (res.betas) {
-        const betas: BetaInfo[] = [];
 
-        for (const beta of res.betas) {
-          const zones = [...beta.caption.matchAll(ZONES_REGEX)].map(
-            (e) => e?.[1] || e?.[0]
-          );
-          const grades = [...beta.caption.matchAll(GRADES_REGEX)].map(
-            (e) => e?.[1] ?? e?.[0]
-          );
-          const month = beta.caption.match(MONTHS_REGEX)?.[0];
-          const instagramMatch = beta.caption.match(INSTAGRAM_HANDLE_REGEX);
-          if (month && grades && zones) {
-            for (var i = 0; i < grades.length; i++) {
-              const grade = grades[i];
-              for (var j = 0; j < zones.length; j++) {
-                const zone = zones[j];
-                if (grade && zone) {
-                  betas.push({
-                    ...beta,
-                    zone,
-                    month,
-                    grade: grade as any,
-                    instagram: instagramMatch?.[0] || null,
-                    date: new Date(beta.timestamp),
-                  });
-                }
-              }
-            }
-          }
-        }
-
-        set({
-          betas,
-        });
-      }
+      set({
+        betas: res.betas.map((b: BetaInfo) => ({
+          ...b,
+          timestamp: new Date(b.timestamp),
+        })),
+      });
     } finally {
       set({ isLoading: false });
     }

@@ -86,11 +86,11 @@ export const AllPage = () => {
         (b) =>
           (!filter.zones.length || filter.zones.includes(b.zone)) &&
           (!filter.grades.length || filter.grades.includes(b.grade)) &&
-          b.date > timeFilter
+          b.timestamp > timeFilter
       )
       .sort((a, b) => {
-        if (a.date > b.date) return isDesc ? -1 : 1;
-        if (a.date < b.date) return isDesc ? 1 : -1;
+        if (a.timestamp > b.timestamp) return isDesc ? -1 : 1;
+        if (a.timestamp < b.timestamp) return isDesc ? 1 : -1;
         return 0;
       });
   }, [allBetas, filter, isReady]);

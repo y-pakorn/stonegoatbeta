@@ -1,6 +1,3 @@
-import { GRADES_LABEL } from "@/constants/grades";
-import { ZONES } from "@/constants/zones";
-
 export interface Beta {
   caption: string;
   id: string;
@@ -8,13 +5,12 @@ export interface Beta {
   media_type: string;
   permalink: string;
   thumbnail_url: string;
-  timestamp: string;
+  timestamp: Date;
 }
 
 export interface BetaInfo extends Beta {
   grade: string;
   zone: string;
-  month: string;
+  month: string | null;
   instagram: string | null;
-  date: Date;
 }
