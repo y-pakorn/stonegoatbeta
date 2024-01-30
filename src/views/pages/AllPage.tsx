@@ -39,6 +39,7 @@ export const AllPage = () => {
       grades: query.grades ? query.grades.toString().split(",") || [] : [],
       time: (query.time || defaultTime) as keyof typeof timeOptions,
       timeSort: (query.timeSort || defaultTimeSort) as string,
+      search: (query.search || "") as string,
     } as const;
   }, [query]);
 
@@ -71,7 +72,9 @@ export const AllPage = () => {
           (!filter.zones.length || filter.zones.includes(b.zone)) &&
           (!filter.grades.length ||
             filter.grades.includes(b.grade.replace(/[0-9]/g, ""))) &&
-          b.timestamp > timeFilter
+          b.timestamp > timeFilter &&
+          (!filter.search ||
+            (b.instagram && b.instagram.includes(filter.search)))
       )
       .sort((a, b) => {
         if (a.timestamp > b.timestamp) return isDesc ? -1 : 1;
@@ -101,7 +104,7 @@ export const AllPage = () => {
               <Spinner size="xl" color="primary.500" />
             </Center>
           ) : (
-            <SimpleGrid spacing={4} columns={[1, 3, 5]}>
+            <SimpleGrid spacing={4} columns={[2, 3, 5]}>
               {betas.map((b, i) => {
                 return (
                   <BetaCard
