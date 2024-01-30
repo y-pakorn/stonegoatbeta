@@ -117,7 +117,6 @@ export const GRADES_LABEL = [
   "purple-tag",
   "purple-black",
   "black-tag",
-  "black-white",
   "white-tag",
   "silverhorn-m",
   "silverhorn-f",
