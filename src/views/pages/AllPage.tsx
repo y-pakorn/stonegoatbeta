@@ -85,7 +85,8 @@ export const AllPage = () => {
       .filter(
         (b) =>
           (!filter.zones.length || filter.zones.includes(b.zone)) &&
-          (!filter.grades.length || filter.grades.includes(b.grade)) &&
+          (!filter.grades.length ||
+            filter.grades.includes(b.grade.replace(/[0-9]/g, ""))) &&
           b.timestamp > timeFilter
       )
       .sort((a, b) => {
