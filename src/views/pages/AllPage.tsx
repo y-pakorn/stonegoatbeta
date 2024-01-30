@@ -12,6 +12,7 @@ import {
   CircularProgress,
   HStack,
   SimpleGrid,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -97,7 +98,7 @@ export const AllPage = () => {
           <FilterBar {...filter} />
           {isLoading ? (
             <Center h="50dvh">
-              <CircularProgress isIndeterminate color="primary.500" />
+              <Spinner size="xl" color="primary.500" />
             </Center>
           ) : (
             <SimpleGrid spacing={4} columns={[1, 3, 5]}>
