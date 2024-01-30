@@ -56,6 +56,7 @@ export const FilterBar = (filter: {
       bg="chakra-body-bg"
       py={4}
       direction={["column", "row"]}
+      spacing={[1, 2]}
     >
       <HStack>
         <Menu closeOnSelect={false}>
