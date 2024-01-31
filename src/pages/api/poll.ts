@@ -40,6 +40,7 @@ export default async function handler(
   }
 
   await supabase.from("betas").insert(betasToInsert);
+  await supabase.rpc("refresh");
 
   res.status(200).json({ status: "OK" });
 }
