@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { FaClockRotateLeft } from "react-icons/fa6";
 
@@ -20,16 +21,20 @@ export const BetaCard = ({
   select: () => void;
   children?: ReactNode;
 }) => {
+  const router = useRouter();
+
   return (
     <Stack align="end">
-      <Image
-        rounded="lg"
-        src={b.thumbnail_url}
-        w="full"
-        fit="scale-down"
-        cursor="pointer"
-        onClick={select}
-      />
+      <Link href={b.permalink} isExternal>
+        <Image
+          rounded="lg"
+          src={b.thumbnail_url}
+          w="full"
+          fit="scale-down"
+          cursor="pointer"
+          //onClick={select}
+        />
+      </Link>
       <Stack spacing={0} align="end" fontStyle="italic" fontSize="sm">
         {b.instagram && (
           <Text
