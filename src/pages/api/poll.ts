@@ -40,6 +40,11 @@ export default async function handler(
       )
     : betas;
 
+  if (filteredBetas.length === 0) {
+    res.status(200).json({ status: "OK", message: "No new betas" });
+    return;
+  }
+
   const betasToInsert = await Promise.all(
     filteredBetas.map(async (beta) => {
       const imageData = await axios.get(beta.thumbnail_url, {
