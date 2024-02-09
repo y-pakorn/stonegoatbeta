@@ -14,6 +14,8 @@ import {
   SimpleGrid,
   Spacer,
   Stack,
+  Text,
+  chakra,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
@@ -100,7 +102,15 @@ export const FilterBar = (filter: {
                           });
                         }}
                       >
-                        {z.name}
+                        <Stack spacing={0}>
+                          <Text>{z.name}</Text>
+                          {z.tooltip && (
+                            <Text fontSize="xs" as="i">
+                              {" "}
+                              ({z.tooltip})
+                            </Text>
+                          )}
+                        </Stack>
                       </MenuItemOption>
                     ))}
                   </SimpleGrid>
