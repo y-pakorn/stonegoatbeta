@@ -9,7 +9,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { FaClockRotateLeft } from "react-icons/fa6";
 
@@ -18,11 +17,9 @@ export const BetaCard = ({
   children,
   ...b
 }: BetaInfo & {
-  select: () => void;
+  select?: () => void;
   children?: ReactNode;
 }) => {
-  const router = useRouter();
-
   return (
     <Stack align="end">
       <Link href={b.permalink} isExternal>

@@ -1,15 +1,12 @@
 import { FilterBar } from "@/components/All/FilterBar";
 import { MiniGrade } from "@/components/All/MiniGrade";
 import { BetaCard } from "@/components/Card/BetaCard";
-import { PlayerModal } from "@/components/Modal/PlayerModal";
 import { Footer, Navbar, Section } from "@/components/common";
 import { AppHeader } from "@/components/common/AppHeader";
 import { getZoneByLabel } from "@/constants/zones";
-import { BetaInfo } from "@/interfaces/beta";
 import { useBetas } from "@/stores/useBetas";
 import {
   Center,
-  CircularProgress,
   HStack,
   SimpleGrid,
   Spinner,
@@ -18,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 export const timeOptions = {
   "1Day": 1,
@@ -83,20 +80,11 @@ export const AllPage = () => {
       });
   }, [allBetas, filter, isReady]);
 
-  const [selectedBeta, setSelectedBeta] = useState<BetaInfo | null>(null);
-
   return (
     <>
       <AppHeader title="All" />
       <Section>
         <Navbar />
-        <PlayerModal
-          isOpen={!!selectedBeta}
-          onClose={() => {
-            setSelectedBeta(null);
-          }}
-          beta={selectedBeta}
-        />
         <Stack py={[2, null, 8]}>
           <FilterBar {...filter} />
           {isLoading ? (
@@ -107,11 +95,7 @@ export const AllPage = () => {
             <SimpleGrid spacing={4} columns={[2, 3, 5]}>
               {betas.map((b, i) => {
                 return (
-                  <BetaCard
-                    {...b}
-                    select={() => setSelectedBeta(b)}
-                    key={`${b.id}-${i}`}
-                  >
+                  <BetaCard {...b} key={`${b.id}-${i}`}>
                     <HStack justify="space-between" fontWeight="bold" w="100%">
                       <Text>
                         <MiniGrade grade={b.grade} />

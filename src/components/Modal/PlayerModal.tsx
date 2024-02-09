@@ -55,7 +55,7 @@ export const PlayerModal = ({
             playing
             loop
             volume={0.2}
-            url={beta?.media_url}
+            url={beta?.thumbnail_url}
             width="100%"
             height="100%"
           />

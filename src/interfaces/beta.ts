@@ -1,8 +1,8 @@
 export interface Beta {
   caption: string;
   id: string;
-  media_url: string;
-  media_type: string;
+  //media_url: string;
+  //media_type: string;
   permalink: string;
   thumbnail_url: string;
   timestamp: Date;
