@@ -22,7 +22,6 @@ export default async function handler(
   const data = await supabase
     .from("detailed_betas")
     .select("*")
-    .neq("grade", null)
     .neq("zone", null)
     .order("timestamp", { ascending: false })
     .limit(200);

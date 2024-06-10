@@ -1,18 +1,5 @@
 import _ from "lodash";
 
-export const COMP_GRADES = {
-  silverhorn: {
-    label: "Silverhorn",
-    icon: "🦌",
-    color: "#008080b3",
-  },
-  ibex: {
-    label: "Ibex",
-    icon: "🐐",
-    color: "#b30059b3",
-  },
-} as const;
-
 export const GRADES = {
   red: {
     label: "Red",
@@ -48,29 +35,6 @@ export const GRADES = {
   },
 } as const;
 
-export const formatCompGrade = (
-  grade: string
-): "silverhorn" | "ibex" | undefined => {
-  if (grade.includes("silverhorn")) {
-    return "silverhorn";
-  } else if (grade.includes("ibex")) {
-    return "ibex";
-  }
-};
-
-export const formatCompGradeWithSex = (
-  grade: string
-): ["silverhorn" | "ibex", "m" | "f"] | undefined => {
-  const sex = grade.includes("m") ? "m" : "f";
-  const g = grade.includes("silverhorn")
-    ? "silverhorn"
-    : grade.includes("ibex")
-    ? "ibex"
-    : undefined;
-  if (!g) return undefined;
-  return [g, sex];
-};
-
 /**
  * Remove '-' and 'tag' from grade and add icon
  * e.g. 'red-tag' -> 'Red 🟥', 'red-orange' -> 'Red Orange 🟥🟧'
@@ -79,19 +43,8 @@ export const formatGradeLabel = (grade: string) => {
   return formatGradeLabelSep(grade).join(" ");
 };
 
-export const formatGradeLabelSep = (grade: string) => {
-  if (formatCompGrade(grade)) {
-    return [
-      _.startCase(
-        grade
-          .replace(/-/g, " ")
-          .replace(/[0-9]/g, "")
-          .replace(" f", "Female")
-          .replace(" m", "Male")
-      ),
-      "",
-    ];
-  }
+export const formatGradeLabelSep = (grade: string | null) => {
+  if (!grade) return ["", ""];
 
   const gradeLabel = grade
     .replace(/-tag/g, "")
@@ -118,10 +71,7 @@ export const GRADES_LABEL = [
   "purple-black",
   "black-tag",
   "white-tag",
-  "silverhorn-m",
-  "silverhorn-f",
-  "ibex-m",
-  "ibex-f",
+  "comp",
 ] as const;
 
 export const GRADES_REGEX =

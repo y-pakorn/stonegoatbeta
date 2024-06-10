@@ -64,15 +64,19 @@ export const AllPage = () => {
     timeFilter.setDate(timeFilter.getDate() - timeOptions[filter.time]);
 
     return allBetas
-      .filter(
-        (b) =>
+      .filter((b) => {
+        const grade =
+          b.zone === "comp-wall" || !b.grade
+            ? "comp"
+            : b.grade?.replace(/[0-9]/g, "");
+        return (
           (!filter.zones.length || filter.zones.includes(b.zone)) &&
-          (!filter.grades.length ||
-            filter.grades.includes(b.grade.replace(/[0-9]/g, ""))) &&
+          (!filter.grades.length || filter.grades.includes(grade)) &&
           b.timestamp > timeFilter &&
           (!filter.search ||
             (b.instagram && b.instagram.includes(filter.search)))
-      )
+        );
+      })
       .sort((a, b) => {
         if (a.timestamp > b.timestamp) return isDesc ? -1 : 1;
         if (a.timestamp < b.timestamp) return isDesc ? 1 : -1;

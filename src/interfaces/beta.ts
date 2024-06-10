@@ -9,7 +9,7 @@ export interface Beta {
 }
 
 export interface BetaInfo extends Beta {
-  grade: string;
+  grade: string | null;
   zone: string;
   month: string | null;
   instagram: string | null;

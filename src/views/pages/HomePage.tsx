@@ -11,7 +11,6 @@ import {
   SimpleGrid,
   Icon,
   useColorMode,
-  HStack,
 } from "@chakra-ui/react";
 import { Section, Navbar, Footer } from "@/components/common";
 import { Logo } from "@/components/common/Logo";
@@ -19,13 +18,7 @@ import { DESCRIPTION, ICON } from "@/constants/texts";
 import { ZONES } from "@/constants/zones";
 import { default as NextLink } from "next/link";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
-import { AppHeader } from "@/components/common/AppHeader";
-import {
-  COMP_GRADES,
-  GRADES_LABEL,
-  formatCompGrade,
-  formatGradeLabelSep,
-} from "@/constants/grades";
+import { GRADES_LABEL, formatGradeLabelSep } from "@/constants/grades";
 
 export const HomePage = () => {
   const { colorMode } = useColorMode();
@@ -99,7 +92,6 @@ export const HomePage = () => {
           <SimpleGrid spacing={4} columns={[1, 2, 4]}>
             {GRADES_LABEL.map((gl) => {
               const [grade, icon] = formatGradeLabelSep(gl);
-              const comp = formatCompGrade(gl);
 
               return (
                 <Card
@@ -107,17 +99,10 @@ export const HomePage = () => {
                   p={4}
                   gap={2}
                   key={gl}
-                  bg={comp && COMP_GRADES[comp].color}
-                  color={comp && "white"}
                   as={Stack}
                   justify="space-between"
                 >
-                  <Text
-                    fontSize={comp ? "lg" : "xl"}
-                    as="b"
-                    alignSelf="center"
-                    textAlign="center"
-                  >
+                  <Text as="b" alignSelf="center" textAlign="center">
                     {icon || grade}
                   </Text>
                   <Button as={NextLink} href={`/all?grades=${gl}`}>
