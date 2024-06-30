@@ -67,7 +67,7 @@ export const HomePage = () => {
           </Stack>
           <Divider my={4} />
           <Heading fontSize="2xl">Walls / Zones</Heading>
-          <SimpleGrid spacing={4} columns={[1, 3, 4]}>
+          <SimpleGrid spacing={4} columns={[2, 3, 4]}>
             {ZONES.map((zone) => (
               <Card rounded="xl" p={4} gap={2} key={zone.label}>
                 <Image
@@ -78,7 +78,7 @@ export const HomePage = () => {
                   fit="cover"
                   rounded="lg"
                 />
-                <Text fontSize="xl" as="b">
+                <Text fontSize={["lg", null, "xl"]} as="b">
                   {zone.name}
                 </Text>
                 <Button as={NextLink} href={`/all?zones=${zone.label}`}>
@@ -89,7 +89,7 @@ export const HomePage = () => {
           </SimpleGrid>
           <Divider my={4} />
           <Heading fontSize="2xl">Grades</Heading>
-          <SimpleGrid spacing={4} columns={[1, 2, 4]}>
+          <SimpleGrid spacing={4} columns={[2, 3, 4]}>
             {GRADES_LABEL.map((gl) => {
               const [grade, icon] = formatGradeLabelSep(gl);
 
